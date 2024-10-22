@@ -1,5 +1,5 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Use an official Python runtime as a parent image (multi-arch support)
+FROM --platform=$BUILDPLATFORM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
