@@ -11,12 +11,14 @@ This project implements a powerful Retrieval Augmented Generation (RAG) system u
 - User-friendly interface powered by Gradio
 - Utilizes GROQ and LLAMA-3 and Langchain for natural language processing
 - Document chunking and embedding storage is provided via ChromaDB Vector Database for efficient search and retrieval 
+- Docker containerization for easy deployment
+- Automated build and push to Docker Hub using GitHub Actions
 
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
 
-- Python 3.7+
+- Docker (for running the containerized version)
 - Groq API key
 
 ## Getting a Groq API Key
@@ -28,47 +30,26 @@ To use this application, you'll need a Groq API key. Follow these steps to obtai
 3. Generate a new API key. Make sure to copy it immediately, as you might not be able to see it again.
 4. Keep this API key secure and do not share it publicly.
 
-## Installation
+## Setup
 
-1. Clone this repository:
-   ```
-   git clone https://github.com/iShshnk/groq-llama3-rag-bot.git
-   ```
-   ```
-   cd groq-llama3-rag-bot
-   ```
-
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-3. Set up your Groq API key:
-   - Open `app.py`
-   - Replace `"your_groq_api_key_here"` with your actual Groq API key
+1. Fork this repository to your GitHub account.
+2. In your GitHub repository settings, add the following secrets:
+   - `DOCKERHUB_USERNAME`: Your Docker Hub username
+   - `DOCKERHUB_TOKEN`: Your Docker Hub access token
+   - `GROQ_API_KEY`: Your Groq API key
+3. Push any changes to the main branch to trigger the GitHub Actions workflow, which will build and push the Docker image to Docker Hub.
 
 ## Usage
 
-1. Run the application:
-   ```
-   python app.py
-   ```
+To run the Docker container:
 
-2. Open your web browser and go to the URL provided in the terminal (usually `http://127.0.0.1:7860`).
+```bash
+docker run -p 7860:7860 [your-dockerhub-username]/groq-llama3-rag-bot:latest
+```
 
-3. Use the Gradio interface to interact with the system:
+Replace `[your-dockerhub-username]` with your actual Docker Hub username.
 
-   Step 1: Upload PDF
-   ![Upload PDF](https://github.com/iShshnk/groq-llama3-rag-bot/blob/main/media/1.png?raw=true)
-
-   Step 2: Process the PDF
-   ![Process PDF](https://github.com/iShshnk/groq-llama3-rag-bot/blob/main/media/2.png)
-
-   Step 3: Enter your Question
-   ![Enter Question](https://github.com/iShshnk/groq-llama3-rag-bot/blob/main/media/3.png)
-
-   Step 4: Get Answer
-   ![Get Answer](https://github.com/iShshnk/groq-llama3-rag-bot/blob/main/media/4.png)
+Then, open your web browser and go to `http://localhost:7860` to access the application.
 
 ## How It Works
 
@@ -86,6 +67,33 @@ To use this application, you'll need a Groq API key. Follow these steps to obtai
    - Convert your question into an embedding
    - Search the ChromaDB vector database for relevant chunks
    - Use GROQ and LLAMA-3 models to generate an answer based on the retrieved chunks and your question
+
+## Development
+
+If you want to run the application locally for development:
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/[your-github-username]/groq-llama3-rag-bot.git
+   cd groq-llama3-rag-bot
+   ```
+
+2. Install the required dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+3. Set up your Groq API key as an environment variable:
+   ```
+   export GROQ_API_KEY=your_groq_api_key_here
+   ```
+
+4. Run the application:
+   ```
+   python app.py
+   ```
+
+5. Open your web browser and go to `http://localhost:7860`.
 
 ## License
 

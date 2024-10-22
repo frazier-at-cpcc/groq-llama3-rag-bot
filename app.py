@@ -12,8 +12,7 @@ from groq import Groq
 from typing import Any, List, Optional
 
 # Set up Groq client
-GROQ_API_KEY = "your_groq_api_key_here"
-os.environ["GROQ_API_KEY"] = GROQ_API_KEY
+GROQ_API_KEY = os.environ["GROQ_API_KEY"]
 groq_client = Groq(api_key=GROQ_API_KEY)
 
 # Custom LLM class for Groq
@@ -119,4 +118,4 @@ with gr.Blocks() as demo:
     question_button.click(answer_question, inputs=[question_input], outputs=[answer_output])
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(server_name="0.0.0.0", server_port=7860)
