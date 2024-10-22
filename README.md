@@ -47,7 +47,7 @@ To run the Docker container:
 docker run -p 7860:7860 [your-dockerhub-username]/groq-llama3-rag-bot:latest
 ```
 
-Replace `[your-dockerhub-username]` with your actual Docker Hub username.
+Replace `docker` with your actual Docker Hub username.
 
 Then, open your web browser and go to `http://localhost:7860` to access the application.
 
